@@ -1,6 +1,5 @@
-const { delayedReminder } = require('../src/reminder')
-
 jest.useFakeTimers()
+const { delayedReminder } = require('../src/reminder')
 
 describe('delayedReminder', () => {
   test('should log the message after the specified delay', async () => {

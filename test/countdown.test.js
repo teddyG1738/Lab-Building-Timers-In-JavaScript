@@ -3,20 +3,14 @@ const { countdownTimer } = require('../src/countdown');
 jest.useFakeTimers();
 
 describe('countdownTimer', () => {
-  beforeEach(() => {
-    console.log = jest.fn(); // Mock console.log
-  });
-
-  afterEach(() => {
-    jest.clearAllMocks(); // Reset mocks after each test
-  });
-
   test('should log remaining time at intervals and stop at 0', () => {
-    const startTime = 5; // 5 seconds
-    const interval = 1000; // 1 second
+    console.log = jest.fn();
+
+    const startTime = 5;
+    const interval = 1000;
     const timerId = countdownTimer(startTime, interval);
 
-    // Fast-forward all timers
+    // Simulate time
     jest.advanceTimersByTime(startTime * interval);
 
     // Verify that console.log was called correctly
@@ -25,7 +19,7 @@ describe('countdownTimer', () => {
       expect(console.log).toHaveBeenCalledWith(i);
     }
 
-    // Verify clearInterval was called
-    clearInterval(timerId); // Ensure cleanup to avoid overlapping
+    // Stop the timer if needed
+    clearInterval(timerId);
   });
 });
